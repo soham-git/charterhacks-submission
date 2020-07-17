@@ -8,3 +8,8 @@ server.listen(PORT, function () {
   console.log('Running');
 });
 var io = require('socket.io')(server);
+io.on('connection',function(socket){
+    socket.on('message',function(data){
+        socket.emit('message',"hello");
+    })
+});
