@@ -3,3 +3,11 @@ h1 {
   font-size: 50px;
   text-align: center;
 }
+#games{
+width: 80%;
+  height: 400px;
+  overflow: scroll;
+  border: solid 1px #e5e5eb;
+  border-radius: 10px;
+  margin:auto;
+}
