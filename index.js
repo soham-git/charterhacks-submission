@@ -37,7 +37,6 @@ CSVToJSON().fromFile('CharterHacks_Words.csv')
 var games = [];
 var socketList = [];
 io.on('connection', function (socket) {
-    console.log(wordList);
     socketList.push({ socket: socket, id: socket.id });
     io.emit('gameList', games);
 
@@ -177,6 +176,8 @@ function startQuestion(game, team, questions) {
     for (var i = 0; i < game.teams[team].players.length; i++) {
         io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer.");
         io.to(game.teams[team].players[i]).emit('question', listOfQuestions[questions].Question);
+        io.to(game.teams[team].players[i]).emit("currentWord","Currently, your word starts with: "+game.teams[team].currentWord);
+
     }
     game.teams[team].player = game.teams[team].players[questions % (game.teams[team].players.length)];
     io.to(game.teams[team].player).emit("playerMessage", "You are the current question answerer.");
@@ -195,6 +196,7 @@ function startQuestion(game, team, questions) {
             clearInterval(gameClock);
         }
         else if (game.teams[team].answer != -1) {
+            game.teams[team].currentWord+=game.teams[team].answer;
             game.teams[team].answer = -1;
             if (questions + 1 < 8) {
                 startQuestion(game, team, questions + 1);
