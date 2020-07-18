@@ -56,14 +56,21 @@
 
         <h1> Multiplayer</h1>
         <h2> Teams will be randomly assigned when the game starts</h2>
-        <p>Timer:</p><p id="timer"></p> <h2 id="questionMessage"></h2>
-        <section style="border-style: solid; padding:10px;" id="games">
+        <p>Timer:</p>
+        <p id="timer"></p>
+        <h2 id="questionMessage"></h2>
+        <section id="currentWord" style="border-style: solid; padding:10px;">
+            
         </section>
+        <br />
+        <section id="questionBox" style="border-style: solid; padding:10px;">
+        </section>
+        <br />
         <section style="text-align: center; border-style: solid; padding:10px;" id="choices">
             <div>
                 <button onclick="submitAns(1);" style="margin:5px; padding: 20px; width:20%">
-                    <p id="answer1">Answer</p><br/>
-                    <p id="letter1">Letter</p><br/>
+                    <p id="answer1">Answer</p><br />
+                    <p id="letter1">Letter</p><br />
                     Choice 1
                 </button>
                 <button onclick="submitAns(2);" style="margin:5px; padding: 20px; width:20%">
