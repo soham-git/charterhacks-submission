@@ -40,6 +40,9 @@ $('#createGame').click(function(){
 function joinGame(gameId){
     socket.emit('joinGame',gameId);
 }
+socket.on('question',function(data){
+    document.getElementById("question").innerHTML=data;
+});
 socket.on("playerMessage",function(data){
     document.getElementById("questionMessage").innerHTML=data;
 });

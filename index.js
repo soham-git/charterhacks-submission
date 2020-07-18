@@ -11,13 +11,13 @@ server.listen(PORT, function () {
 });
 var io = require('socket.io')(server);
 
-var questions;
+var listOfQuestions;
 CSVToJSON().fromFile('CharterHacks_Questions.csv')
     .then(data => {
 
         // users is a JSON array
         // log the JSON array
-        questions = data;
+        listOfQuestions = data;
     }).catch(err => {
         // log error if any
         console.log(err);
@@ -164,10 +164,11 @@ function startGame(game) {
 }
 function startQuestion(game, team, questions) {
     for (var i = 0; i < game.teams[team].players.length; i++) {
-        io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer. "+game.questionList[questions]);
+        io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer.");
+        io.to(game.teams[team].players[i]).emit('question',listOfQuestions[questions].Question);
     }
     game.teams[team].player = game.teams[team].players[questions % (game.teams[team].players.length)];
-    io.to(game.teams[team].player).emit("playerMessage", "You are the current question answerer." +" "+game.questionList[questions]);
+    io.to(game.teams[team].player).emit("playerMessage", "You are the current question answerer.");
     var date = new Date();
     var startTime = date.getTime();
     var gameClock = setInterval(function () {
