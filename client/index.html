@@ -12,8 +12,9 @@
 <body>
     <h1>Co-opvid</h1>
     <div id="lobby">
-        <p> Select your game mode:</p>
-        <table>
+        <div id="game-mode-selector">
+        <p> Create a game:</p>
+        <table class="center">
             <tr>
                 <td>
                     <p><b>Game Name:</b></p>
@@ -38,7 +39,8 @@
                 </td>
             </tr>
         </table>
-
+      </div>
+      <br><br>
 
         <section style="border-style: solid; padding:10px;" id="games">
         </section>
@@ -60,7 +62,7 @@
         <p id="timer"></p>
         <h2 id="questionMessage"></h2>
         <section id="currentWord" style="border-style: solid; padding:10px;">
-            
+
         </section>
         <br />
         <section id="questionBox" style="border-style: solid; padding:10px;">
