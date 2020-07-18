@@ -12,6 +12,7 @@ server.listen(PORT, function () {
 var io = require('socket.io')(server);
 
 var listOfQuestions;
+var wordList;
 CSVToJSON().fromFile('CharterHacks_Questions.csv')
     .then(data => {
 
@@ -23,11 +24,19 @@ CSVToJSON().fromFile('CharterHacks_Questions.csv')
         console.log(err);
     });
 
+CSVToJSON().fromFile('CharterHacks_Words.csv')
+    .then(data => {
 
+        // users is a JSON array
+        // log the JSON array
+        wordList = data;
+    }).catch(err => {
+        // log error if any
+        console.log(err);
+    });
 var games = [];
 var socketList = [];
 io.on('connection', function (socket) {
-
     socketList.push({ socket: socket, id: socket.id });
     io.emit('gameList', games);
 
@@ -36,7 +45,7 @@ io.on('connection', function (socket) {
         console.log(socket.id);
     })
     socket.on('createGame', function (data) {
-        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{players:[],question:-1,answer:-1,player:-1},{players:[],question:-1,answer:-1,player:-1}], started: false,questionList:[]});
+        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{ players: [], question: -1, answer: -1, player: -1, currentWord: "" }, { players: [], question: -1, answer: -1, player: -1, currentWord: "" }], started: false, questionList: [],word:"" });
         socket.join(data.gameId);
         socket.emit('joinGame', { gameMode: "multi" });
         io.emit('gameList', games);
@@ -62,7 +71,7 @@ io.on('connection', function (socket) {
                         games[i].playerList.splice(j, 1);
                         j--;
                     }
-                    
+
                 }
                 for (var j = 0; j < games[i].teams[0].players.length; j++) {
                     if (games[i].teams[0].players[j] == socket.id) {
@@ -153,19 +162,22 @@ function startGame(game) {
     game.teams[0].players = team1;
     game.teams[1].players = team2;
     game.questionList = [];
-    while(game.questionList.length < 8){
-        var r = Math.floor(Math.random() * 60) ;
-        if(game.questionList.indexOf(r) === -1) game.questionList.push(r);
+    while (game.questionList.length < 8) {
+        var r = Math.floor(Math.random() * 60);
+        if (game.questionList.indexOf(r) === -1) game.questionList.push(r);
     }
+    game.word=wordList[Math.floor(Math.random() * (500)) + 1].word;
     startQuestion(game, 0, 0);
     startQuestion(game, 1, 0);
     io.emit('gameList', games);
-
 }
 function startQuestion(game, team, questions) {
+    
     for (var i = 0; i < game.teams[team].players.length; i++) {
         io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer.");
-        io.to(game.teams[team].players[i]).emit('question',listOfQuestions[questions].Question);
+        io.to(game.teams[team].players[i]).emit('question', listOfQuestions[questions].Question);
+        io.to(game.teams[team].players[i]).emit("currentWord","Currently, your word starts with: "+game.teams[team].currentWord);
+
     }
     game.teams[team].player = game.teams[team].players[questions % (game.teams[team].players.length)];
     io.to(game.teams[team].player).emit("playerMessage", "You are the current question answerer.");
@@ -178,18 +190,19 @@ function startQuestion(game, team, questions) {
             io.to(game.teams[team].players[i]).emit('timer', (15000 - (curTime - startTime)) / 1000);
         }
         if (curTime - startTime > 15000) {
-            if(questions+1<8){
+            if (questions + 1 < 8) {
                 startQuestion(game, team, questions + 1);
             }
             clearInterval(gameClock);
         }
         else if (game.teams[team].answer != -1) {
+            game.teams[team].currentWord+=game.teams[team].answer;
             game.teams[team].answer = -1;
-            if(questions+1<8){
+            if (questions + 1 < 8) {
                 startQuestion(game, team, questions + 1);
             }
             clearInterval(gameClock);
         }
-        
+
     }, 10);
 }

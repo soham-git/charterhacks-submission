@@ -37,9 +37,13 @@ $('#createGame').click(function(){
         //showMultiPlayer();
     }
 });
+
 function joinGame(gameId){
     socket.emit('joinGame',gameId);
 }
+socket.on('currentWord',function(data){
+    document.getElementById("currentWord").innerHTML = data;
+});
 socket.on('question',function(data){
     document.getElementById("question").innerHTML=data;
 });
