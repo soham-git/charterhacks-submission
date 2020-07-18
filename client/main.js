@@ -54,7 +54,10 @@ socket.on("gameList",function(data){
 
     for(var i = 0; i<data.length; i++){
         var gameBtn = '<button style="margin:5px; padding: 20px;" onclick="joinGame('+data[i].gameId+');">'  + data[i].gameName+"'s Game"+'</button>'
-        $("#games").append(gameBtn);
+        
+        if(!data[i].started){
+            $("#games").append(gameBtn);
+        }
 
     }
 });

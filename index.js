@@ -20,7 +20,7 @@ io.on('connection', function (socket) {
         console.log(socket.id);
     })
     socket.on('createGame', function (data) {
-        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [], started: false, team1Question: -1, team2Question: -1, team1Answer: -1, team2Answer: -1, team1Player: -1, team2Player: -1 });
+        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [[],[]], started: false, team1Question: -1, team2Question: -1, team1Answer: -1, team2Answer: -1, team1Player: -1, team2Player: -1 });
         socket.join(data.gameId);
         socket.emit('joinGame', { gameMode: "multi" });
         io.emit('gameList', games);
@@ -90,6 +90,8 @@ io.on('connection', function (socket) {
                 }
             }
         }
+        io.emit('gameList', games);
+
     });
 
     socket.on('start', function (data) {
@@ -104,6 +106,8 @@ io.on('connection', function (socket) {
                 break;
             }
         }
+        io.emit('gameList', games);
+
 
     });
     socket.on('submitAns', function (choice) {
@@ -121,6 +125,8 @@ io.on('connection', function (socket) {
                 }
             }
         }
+        io.emit('gameList', games);
+
     });
 });
 
@@ -132,11 +138,12 @@ function startGame(game) {
     const half = Math.ceil(game.playerList.length / 2);
     var team2 = [...game.playerList];
     var team1 = team2.splice(0, half)
-    game.teams.push(team1)
-    game.teams.push(team2)
+    game.teams[0] = team1;
+    game.teams[1] = team2;
 
     startQuestion(game, 0, 1);
     startQuestion(game, 1, 1);
+    io.emit('gameList', games);
 
 }
 function startQuestion(game, team, questions) {
