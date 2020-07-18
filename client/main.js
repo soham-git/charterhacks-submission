@@ -19,7 +19,6 @@ function showMultiPlayer(){
     $("#multiPlayer").show();
 }
 function submitAns(choice){
-    alert(choice);
     socket.emit('submitAns',choice);
 }
 $('#multiStart').click(function(){
@@ -41,6 +40,9 @@ $('#createGame').click(function(){
 function joinGame(gameId){
     socket.emit('joinGame',gameId);
 }
+socket.on("playerMessage",function(data){
+    document.getElementById("questionMessage").innerHTML=data;
+});
 socket.on("timer",function(data){
     document.getElementById("timer").innerHTML = data;
 });

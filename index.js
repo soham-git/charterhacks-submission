@@ -20,7 +20,7 @@ io.on('connection', function (socket) {
         console.log(socket.id);
     })
     socket.on('createGame', function (data) {
-        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [], started: false, team1Question: -1, team2Question: -1, team1Answer: -1, team2Answer: -1 });
+        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [], started: false, team1Question: -1, team2Question: -1, team1Answer: -1, team2Answer: -1, team1Player: -1, team2Player: -1 });
         socket.join(data.gameId);
         socket.emit('joinGame', { gameMode: "multi" });
         io.emit('gameList', games);
@@ -45,6 +45,18 @@ io.on('connection', function (socket) {
                         games[i].playerList.splice(j, 1);
                         j--;
                     }
+                    for (var j = 0; j < games[i].teams[0].length; j++) {
+                        if (games[i].teams[0][j] == socket.id) {
+                            games[i].teams[0].splice(j, 1);
+                            j--;
+                        }
+                    }
+                    for (var j = 0; j < games[i].teams[1].length; j++) {
+                        if (games[i].teams[1][j] == socket.id) {
+                            games[i].teams[1].splice(j, 1);
+                            j--;
+                        }
+                    }
                 }
             }
         }
@@ -61,6 +73,18 @@ io.on('connection', function (socket) {
                 for (var j = 0; j < games[i].playerList.length; j++) {
                     if (games[i].playerList[j] == socket.id) {
                         games[i].playerList.splice(j, 1);
+                        j--;
+                    }
+                }
+                for (var j = 0; j < games[i].teams[0].length; j++) {
+                    if (games[i].teams[0][j] == socket.id) {
+                        games[i].teams[0].splice(j, 1);
+                        j--;
+                    }
+                }
+                for (var j = 0; j < games[i].teams[1].length; j++) {
+                    if (games[i].teams[1][j] == socket.id) {
+                        games[i].teams[1].splice(j, 1);
                         j--;
                     }
                 }
@@ -86,10 +110,14 @@ io.on('connection', function (socket) {
         for (var i = 0; i < games.length; i++) {
             if (games[i].playerList.includes(socket.id)) {
                 if (games[i].teams[0].includes(socket.id)) {
-                    games[i].team1Answer = choice;
+                    if (games[i].team1Player == socket.id) {
+                        games[i].team1Answer = choice;
+                    }
                 }
                 if (games[i].teams[1].includes(socket.id)) {
-                    games[i].team2Answer = choice;
+                    if (games[i].team2Player == socket.id) {
+                        games[i].team2Answer = choice;
+                    }
                 }
             }
         }
@@ -112,6 +140,19 @@ function startGame(game) {
 
 }
 function startQuestion(game, team, questions) {
+    for (var i = 0; i < game.teams[team].length; i++) {
+        io.to(game.teams[team][i]).emit('playerMessage', "Wait until it is your turn to answer.");
+    }
+    if (team == 0) {
+        game.team1Player = game.teams[0][questions % (game.teams[0].length)];
+
+        io.to(game.team1Player).emit("playerMessage", "You are the current question answerer.");
+    }
+    else if (team == 1) {
+        game.team2Player = game.teams[1][questions % (game.teams[1].length)];
+        io.to(game.team2Player).emit("playerMessage", "You are the current question answerer.");
+
+    }
     var date = new Date();
     var startTime = date.getTime();
     var gameClock = setInterval(function () {
@@ -124,13 +165,13 @@ function startQuestion(game, team, questions) {
             startQuestion(game, team, questions + 1);
             clearInterval(gameClock);
         }
-        else if(team==0 && game.team1Answer!=-1){
-            game.team1Answer=-1;
+        else if (team == 0 && game.team1Answer != -1) {
+            game.team1Answer = -1;
             startQuestion(game, team, questions + 1);
             clearInterval(gameClock);
         }
-        else if(team==1 && game.team2Answer!=-1){
-            game.team2Answer=-1;
+        else if (team == 1 && game.team2Answer != -1) {
+            game.team2Answer = -1;
             startQuestion(game, team, questions + 1);
             clearInterval(gameClock);
         }
