@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Co-opvid</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Co-opvid</h1>
-        <div id="lobby">
-            <p> Select your game mode:</p>
-            <select id="gamemode">
-                <option value="singleplayer">Single Player</option>
-                <option value="multiplayer">Multiplayer</option>
-            </select>
-            <button id="createGame"> Create Game</button>
-            <section style = "border-style: solid; padding:10px;" id="games">
-                <button id="testGame" style="padding: 20px;"> Jonathan's Game </button>
-            </section>
-        </div>
-        <div style="display: none;" id="singlePlayer">
-            <button onclick="showLobby();"> Lobby</button>
-            <h1>Single Player</h1>
 
-            <section style = "border-style: solid; padding:10px;" id="games">
-            </section>
-        </div>
-        <div style="display: none;" id="multiPlayer">
-            <button onclick="showLobby();"> Lobby</button>
+<head>
+    <title>Co-opvid</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
+</head>
 
-            <h1> Multiplayer</h1>
+<body>
+    <h1>Co-opvid</h1>
+    <div id="lobby">
+        <p> Select your game mode:</p>
+        <table>
+            <tr>
+                <td>
+                    <p><b>Game Name:</b></p>
+                </td>
+                <td>
+                    <input id="gameName" placeholder="Name"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><b>Game Mode:</b></p>
+                </td>
+                <td><select id="gamemode">
+                        <option value="singleplayer">Single Player</option>
+                        <option value="multiplayer">Multiplayer</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="createGame"> Create Game</button>
+                </td>
+            </tr>
+        </table>
 
-            <section style = "border-style: solid; padding:10px;" id="games">
-            </section>
-        </div>
-    </body>
-    <script src="main.js"></script>
+        
+        <section style="border-style: solid; padding:10px;" id="games">
+        </section>
+    </div>
+    <div style="display: none;" id="singlePlayer">
+        <button onclick="showLobby();"> Lobby</button>
+        <h1>Single Player</h1>
+
+        <section style="border-style: solid; padding:10px;" id="games">
+        </section>
+    </div>
+    <div style="display: none;" id="multiPlayer">
+        <button onclick="showLobby();"> Lobby</button>
+
+        <h1> Multiplayer</h1>
+        <h2> Teams will be randomly assigned when the game starts</h2>
+        <section style="border-style: solid; padding:10px;" id="games">
+        </section>
+    </div>
+</body>
+<script src="main.js"></script>
 
 </html>
