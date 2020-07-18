@@ -1,10 +1,12 @@
 var socket = io();
-
+function leaveGame(){
+    socket.emit('leaveGame',true);
+}
 function showLobby(){
     $("#lobby").show();
     $("#singlePlayer").hide();
     $("#multiPlayer").hide();
-
+    leaveGame();
 }
 function showSinglePlayer(){
     $("#lobby").hide();
@@ -16,6 +18,9 @@ function showMultiPlayer(){
     $("#singlePlayer").hide();
     $("#multiPlayer").show();
 }
+$('#multiStart').click(function(){
+    socket.emit('start',true);
+});
 $('#createGame').click(function(){
     var gamemode = document.getElementById("gamemode");
     if(gamemode.value == "singleplayer"){

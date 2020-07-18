@@ -19,7 +19,7 @@
                     <p><b>Game Name:</b></p>
                 </td>
                 <td>
-                    <input id="gameName" placeholder="Name"/>
+                    <input id="gameName" placeholder="Name" />
                 </td>
             </tr>
             <tr>
@@ -39,7 +39,7 @@
             </tr>
         </table>
 
-        
+
         <section style="border-style: solid; padding:10px;" id="games">
         </section>
     </div>
@@ -52,11 +52,28 @@
     </div>
     <div style="display: none;" id="multiPlayer">
         <button onclick="showLobby();"> Lobby</button>
+        <button id="multiStart"> Start</button>
 
         <h1> Multiplayer</h1>
         <h2> Teams will be randomly assigned when the game starts</h2>
         <section style="border-style: solid; padding:10px;" id="games">
         </section>
+        <section style="text-align: center; border-style: solid; padding:10px;" id="choices">
+            <div>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 1</button>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 2</button>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 3</button>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 4</button>
+            </div>
+            <br/>
+            <div>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 1</button>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 2</button>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 3</button>
+                <button style="margin:5px; padding: 20px; width:20%">Choice 4</button>
+            </div>
+        </section>
+
     </div>
 </body>
 <script src="main.js"></script>
