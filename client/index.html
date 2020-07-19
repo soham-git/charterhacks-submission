@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,19 +21,19 @@
         <div id="collapsible">
           <button type="button" class="collapsible">How To Play</button>
           <div class="content">
-            <p>Co-opvid is a fun little multiplayer trivia game all about COVID-19! Below you'll see a Game Creation menu, and underneath that lies the lobby, where you can join other games. When people join the lobby and you press Start, you will automatically be placed into teams.</p><p>The goal of each game is to fill in the missing letters of a word by answering COVID-related questions. If you get the question correct, one letter will go into the right spot. However, if you get it wrong, an incorrect letter will go into that spot. Each game has exactly 8 questions for you to enjoy. Have fun!</p>
+            <p style="font-family: 'Open Sans', sans-serif;">Co-opvid is a fun little multiplayer trivia game all about COVID-19! Below you'll see a Game Creation menu, and underneath that lies the lobby, where you can join other games. When people join the lobby and you press Start, you will automatically be placed into teams.</p><p style="font-family: 'Open Sans', sans-serif;">The goal of each game is to fill in the missing letters of a word by answering COVID-related questions. If you get the question correct, one letter will go into the right spot. However, if you get it wrong, an incorrect letter will go into that spot. Each game has exactly 8 questions for you to enjoy. Have fun!</p>
           </div>
         </div>
         <br><br>
 
         <div id="game-create-selector">
 
-        <p class="large"> Create a game:</p>
+        <p class="large" style="font-family: 'Open Sans', sans-serif;"> Create a game:</p>
 
         <table class="center">
             <tr>
                 <td>
-                    <p class="large"><b>User Name: &nbsp</b></p>
+                    <p class="large" style="font-family: 'Open Sans', sans-serif;"><b>User Name: &nbsp</b></p>
                 </td>
                 <td>
                     <input class="w3-input" type="text" id="gameName" placeholder="Name" />
@@ -41,7 +42,7 @@
 
             <tr>
                 <td>
-                    <p class="large"><b>Game Mode:</b></p>
+                    <p class="large" style="font-family: 'Open Sans', sans-serif;"><b>Game Mode:</b></p>
                 </td>
                 <td><select id="gamemode" style="width:130px;">
                         <option value="multiplayer">Multiplayer</option>
@@ -51,7 +52,7 @@
 
             <tr>
                 <td>
-                    <button id="createGame" class="center"> Create Game</button>
+                    <button id="createGame" class="center" style="font-family: 'Open Sans', sans-serif;"> Create Game</button>
                 </td>
             </tr>
 
@@ -77,16 +78,16 @@
         <button id="multiStart"> Start</button>
 
         <h1 style="font-family: 'Montserrat Subrayada', sans-serif;"> Multiplayer</h1>
-        <h2> Teams will be randomly assigned when the game starts</h2>
+        <p style="font-family: 'Open Sans', sans-serif;"> Teams will be randomly assigned when the game starts</p>
         <h1 style="font-family: 'Montserrat Subrayada', sans-serif;">Timer:</h1>
-        <h1 id="timer"></h1>
-        <h2 id="questionMessage"></h2>
+        <h1 id="timer" style="font-family: 'Open Sans', sans-serif;"></h1>
+        <h2 id="questionMessage" style="font-family: 'Open Sans', sans-serif;"></h2>
         <section id="currentWordBox" style="border-style: solid; padding:10px;">
-            <p id="currentWord"></p>
+            <b><h3 id="currentWord" style="font-family: 'Open Sans', sans-serif;"></h3></b>
         </section>
         <br />
         <section id="questionBox" style="border-style: solid; padding:10px;">
-            <p id="question"></p>
+            <p id="question" style="font-family: 'Open Sans', sans-serif; font-size:20px"></p>
         </section>
         <br />
         <section style="text-align: center; border-style: solid; padding:10px;" id="choices">
