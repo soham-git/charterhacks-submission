@@ -11,8 +11,8 @@ p {
 }
 
 #collapsible{
-  margin-left: 400px;
-  margin-right: 400px;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 #games {
@@ -21,7 +21,8 @@ p {
   overflow: scroll;
   border: solid 1px #e5e5eb;
   border-radius: 10px;
-  margin:auto;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 #game-create-selector {
