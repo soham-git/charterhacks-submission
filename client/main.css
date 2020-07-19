@@ -30,6 +30,11 @@ p {
   padding-bottom: 20px;
 }
 
+#multiPlayer {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 table.center {
   margin-left: auto;
   margin-right: auto;
