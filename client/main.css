@@ -23,8 +23,20 @@ p {
   border-style: solid;
   margin-left: 200px;
   margin-right: 200px;
+  padding-bottom: 20px;
 }
 table.center {
   margin-left: auto;
   margin-right: auto;
+}
+p.large {
+  font-size: 20px;
+}
+button.center {
+  height:30px;
+  width:150px;
+  margin: -20px -50px;
+  position:relative;
+  top:50%;
+  left:50%;
 }
