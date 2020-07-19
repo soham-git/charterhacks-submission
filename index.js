@@ -175,7 +175,7 @@ function startQuestion(game, team, questions) {
     
     for (var i = 0; i < game.teams[team].players.length; i++) {
         io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer.");
-        io.to(game.teams[team].players[i]).emit('question', listOfQuestions[questions].Question);
+        io.to(game.teams[team].players[i]).emit('question', listOfQuestions[questions]);
         io.to(game.teams[team].players[i]).emit("currentWord","Currently, your word starts with: "+game.teams[team].currentWord);
 
     }
@@ -190,6 +190,7 @@ function startQuestion(game, team, questions) {
             io.to(game.teams[team].players[i]).emit('timer', (15000 - (curTime - startTime)) / 1000);
         }
         if (curTime - startTime > 15000) {
+            game.teams[team].currentWord+=" ";
             if (questions + 1 < 8) {
                 startQuestion(game, team, questions + 1);
             }
