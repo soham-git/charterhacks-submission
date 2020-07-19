@@ -45,7 +45,8 @@ socket.on('currentWord',function(data){
     document.getElementById("currentWord").innerHTML = data;
 });
 socket.on('question',function(data){
-    document.getElementById("question").innerHTML=data;
+    document.getElementById("question").innerHTML=data.Question;
+    
 });
 socket.on("playerMessage",function(data){
     document.getElementById("questionMessage").innerHTML=data;
