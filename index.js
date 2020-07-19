@@ -102,6 +102,7 @@ io.on('connection', function (socket) {
     socket.on('leaveGame', function () {
         for (var i = 0; i < games.length; i++) {
             if (games[i].playerList.includes(socket.id)) {
+                socket.leave(games[i].gameId);
                 for (var j = 0; j < games[i].playerList.length; j++) {
                     if (games[i].playerList[j] == socket.id) {
                         games[i].playerList.splice(j, 1);
@@ -236,7 +237,7 @@ function startQuestion(game, team, questions) {
         var curDate = new Date();
         curTime = curDate.getTime();
         for (var i = 0; i < game.teams[team].players.length; i++) {
-            io.to(game.teams[team].players[i]).emit('timer', (15000 - (curTime - startTime)) / 1000);
+            io.to(game.teams[team].players[i]).emit('timer', Math.max(0,(15000 - (curTime - startTime)) / 1000));
         }
         if (curTime - startTime > 15000) {
             game.teams[team].currentWord += "_";
