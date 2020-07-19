@@ -83,6 +83,10 @@ socket.on('answerChoices',function(data){
     document.getElementById("answer4").innerHTML = data[3].answer;
 
 });
+socket.on("gameInfo",function(data){
+    document.getElementById("questionMessage").innerHTML= "The original word was "+data.origWord+". Team 1 got: "+data.team1Word+" Team 2 got: "+data.team2Word;
+
+});
 socket.on("playerMessage",function(data){
     document.getElementById("questionMessage").innerHTML=data;
 });
@@ -98,7 +102,7 @@ socket.on("gameList",function(data){
     for(var i = 0; i<data.length; i++){
         var gameBtn = '<button style="margin:5px; padding: 20px;" onclick="joinGame('+data[i].gameId+');">'  + data[i].gameName+"'s Game"+'</button>'
         
-        if(!data[i].started){
+        if(!data[i].started && data[i].playerList.length>0){
             $("#games").append(gameBtn);
         }
 

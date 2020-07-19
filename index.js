@@ -59,6 +59,8 @@ io.on('connection', function (socket) {
                 break;
             }
         }
+        io.emit('gameList', games);
+
     });
     socket.on('disconnect', function () {
         for (var i = 0; i < games.length; i++) {
@@ -84,6 +86,8 @@ io.on('connection', function (socket) {
                 }
             }
         }
+        io.emit('gameList', games);
+
     });
     socket.on('leaveGame', function () {
         for (var i = 0; i < games.length; i++) {
@@ -171,7 +175,7 @@ function startQuestion(game, team, questions) {
     if(questions==8){
         game.teams[team].done= true;
         if(game.teams[(team+1)%2].done){
-
+            io.to(game.gameId).emit("gameInfo",{origWord:game.word, team1Word:game.teams[0].currentWord,team2Word:game.teams[1].currentWord});
         }
         return;
     }
@@ -200,22 +204,22 @@ function startQuestion(game, team, questions) {
 
 
     for (var i = 0; i < game.teams[team].players.length; i++) {
-        io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer.");
+        io.to(game.teams[team].players[i]).emit('playerMessage', "Wait until it is your turn to answer. You are on team "+(team+1));
         io.to(game.teams[team].players[i]).emit('question', listOfQuestions[game.questionList[questions]].Question);
         io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
         io.to(game.teams[team].players[i]).emit('answerChoices', answerChoices);
     }
     game.teams[team].player = game.teams[team].players[questions % (game.teams[team].players.length)];
-    io.to(game.teams[team].player).emit("playerMessage", "You are the current question answerer.");
+    io.to(game.teams[team].player).emit("playerMessage", "You are the current question answerer. You are on team "+(team+1));
     var date = new Date();
     var startTime = date.getTime();
     var gameClock = setInterval(function () {
         var curDate = new Date();
         curTime = curDate.getTime();
         for (var i = 0; i < game.teams[team].players.length; i++) {
-            io.to(game.teams[team].players[i]).emit('timer', (10000 - (curTime - startTime)) / 1000);
+            io.to(game.teams[team].players[i]).emit('timer', (15000 - (curTime - startTime)) / 1000);
         }
-        if (curTime - startTime > 10000) {
+        if (curTime - startTime > 15000) {
             game.teams[team].currentWord += " ";
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
@@ -231,7 +235,7 @@ function startQuestion(game, team, questions) {
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
             }
-            if (questions + 1 < 8) {
+            if (questions + 1 <= 8) {
                 startQuestion(game, team, questions + 1);
             }
             clearInterval(gameClock);
