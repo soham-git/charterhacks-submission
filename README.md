@@ -6,4 +6,3 @@ The goal of each game is to fill in the missing letters of a word by answering C
 
 Each game has exactly 8 questions for you to enjoy. At the end of the round, you will see your score and your opponents score. Have fun!
 
-co-opvid.herokuapp.com/
