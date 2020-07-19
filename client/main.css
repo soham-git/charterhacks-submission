@@ -10,7 +10,7 @@ p {
   font-family: 'Arial', sans-serif;
 }
 
-#collapsible {
+#collapsible{
   margin-left: 400px;
   margin-right: 400px;
 }
@@ -56,7 +56,7 @@ button.center {
   left:50%;
 }
 
-.collapsible {
+.collapsible{
   background-color: #white;
   color: black;
   cursor: pointer;
