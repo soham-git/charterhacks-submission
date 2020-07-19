@@ -207,9 +207,9 @@ function startQuestion(game, team, questions) {
         var curDate = new Date();
         curTime = curDate.getTime();
         for (var i = 0; i < game.teams[team].players.length; i++) {
-            io.to(game.teams[team].players[i]).emit('timer', (15000 - (curTime - startTime)) / 1000);
+            io.to(game.teams[team].players[i]).emit('timer', (10000 - (curTime - startTime)) / 1000);
         }
-        if (curTime - startTime > 15000) {
+        if (curTime - startTime > 10000) {
             game.teams[team].currentWord += " ";
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
