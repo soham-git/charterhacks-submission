@@ -10,9 +10,9 @@ p {
   font-family: 'Arial', sans-serif;
 }
 
-#collapsible {
-    margin-left:20%;
-    margin-right:20%;
+#collapsible{
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 #games {
@@ -21,15 +21,16 @@ p {
   overflow: scroll;
   border: solid 1px #e5e5eb;
   border-radius: 10px;
-  margin:auto;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 #game-create-selector {
   text-align: center;
   padding: 5px;
   border-style: solid;
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 200px;
+  margin-right: 200px;
   padding-bottom: 20px;
 }
 
@@ -56,7 +57,7 @@ button.center {
   left:50%;
 }
 
-.collapsible {
+.collapsible{
   background-color: #white;
   color: black;
   cursor: pointer;
