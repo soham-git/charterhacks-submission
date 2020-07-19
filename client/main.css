@@ -47,14 +47,7 @@ p.large {
   font-size: 20px;
 }
 
-button.center {
-  height:30px;
-  width:150px;
-  margin: -20px -50px;
-  position:relative;
-  top:50%;
-  left:50%;
-}
+
 
 .collapsible {
   background-color: white;
@@ -80,4 +73,14 @@ button.center {
   display: none;
   overflow: hidden;
   background-color: #E0FBFF;
+}
+button{
+  background-color: #717488; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

@@ -44,7 +44,11 @@ io.on('connection', function (socket) {
         socket.emit('message', "hello");
     })
     socket.on('createGame', function (data) {
+        if(data.gameName.trim() == ""){
+            data.gameName = "Default Game";
+        }
         games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{ players: [], question: -1, answer: -1, player: -1, currentWord: "", done:false,score:0 }, { players: [], question: -1, answer: -1, player: -1, currentWord: "",done:false,score:0 }], started: false, questionList: [], word: "" });
+        
         socket.join(data.gameId);
         socket.emit('joinGame', { gameMode: "multi" });
         io.to(data.gameId).emit("updatePlayerList",games[games.length-1].playerList.length);
@@ -235,7 +239,7 @@ function startQuestion(game, team, questions) {
             io.to(game.teams[team].players[i]).emit('timer', (15000 - (curTime - startTime)) / 1000);
         }
         if (curTime - startTime > 15000) {
-            game.teams[team].currentWord += " ";
+            game.teams[team].currentWord += "_";
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
             }
