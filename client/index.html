@@ -7,37 +7,55 @@
     <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body>
-    <h1>Co-opvid</h1>
+
+    <h1 style="font-family: 'Montserrat Subrayada', sans-serif; font-size:60px;">Co-opvid</h1>
+    <br><br>
+
     <div id="lobby">
-        <div id="game-mode-selector">
-        <p> Create a game:</p>
+
+        <div id="collapsible">
+          <button type="button" class="collapsible">How To Play</button>
+          <div class="content">
+            <p>Co-opvid is a fun little trivia game all about COVID-19! Below you'll see a Game Creation menu, and below that lies the lobby, where you can join other multiplayer games. You can also make a singleplayer game.</p><p>The goal of each game is to fill in the missing letters of a word by answering COVID-related questions. If you get the question correct, one letter will go into the right spot. However, if you get it wrong, an incorrect letter will go into that spot. Each game has exactly 8 questions for you to enjoy. Have fun!</p>
+          </div>
+        </div>
+        <br><br>
+
+        <div id="game-create-selector">
+
+        <p class="large"> Create a game:</p>
+
         <table class="center">
             <tr>
                 <td>
-                    <p><b>Game Name:</b></p>
+                    <p class="large"><b>Game Name: &nbsp</b></p>
                 </td>
                 <td>
-                    <input id="gameName" placeholder="Name" />
+                    <input class="w3-input" type="text" id="gameName" placeholder="Name" />
                 </td>
             </tr>
+
             <tr>
                 <td>
-                    <p><b>Game Mode:</b></p>
+                    <p class="large"><b>Game Mode:</b></p>
                 </td>
-                <td><select id="gamemode">
+                <td><select id="gamemode" style="width:130px;">
                         <option value="singleplayer">Single Player</option>
                         <option value="multiplayer">Multiplayer</option>
                     </select>
                 </td>
             </tr>
+
             <tr>
                 <td>
-                    <button id="createGame"> Create Game</button>
+                    <button id="createGame" class="center"> Create Game</button>
                 </td>
             </tr>
+
         </table>
       </div>
       <br><br>
@@ -45,13 +63,16 @@
         <section style="border-style: solid; padding:10px;" id="games">
         </section>
     </div>
+
+
     <div style="display: none;" id="singlePlayer">
-        <button onclick="showLobby();"> Lobby</button>
+        <button onclick="showLobby();" class="center"> Lobby</button>
         <h1>Single Player</h1>
 
         <section style="border-style: solid; padding:10px;" id="games">
         </section>
     </div>
+
     <div style="display: none;" id="multiPlayer">
         <button onclick="showLobby();"> Lobby</button>
         <button id="multiStart"> Start</button>
@@ -93,5 +114,21 @@
     </div>
 </body>
 <script src="main.js"></script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 
 </html>
