@@ -17,6 +17,29 @@ function showMultiPlayer(){
     $("#lobby").hide();
     $("#singlePlayer").hide();
     $("#multiPlayer").show();
+
+    document.getElementById("btnChoice1").onclick = function(){};
+    document.getElementById("btnChoice2").onclick = function(){};
+    document.getElementById("btnChoice3").onclick = function(){};
+    document.getElementById("btnChoice4").onclick = function(){};
+
+    document.getElementById("letter1").innerHTML = "";
+    document.getElementById("letter2").innerHTML = "";
+    document.getElementById("letter3").innerHTML = "";
+    document.getElementById("letter4").innerHTML = "";
+
+    document.getElementById("answer1").innerHTML = "";
+    document.getElementById("answer2").innerHTML = "";
+    document.getElementById("answer3").innerHTML = "";
+    document.getElementById("answer4").innerHTML = "";
+
+    document.getElementById("questionMessage").innerHTML= "";
+
+    document.getElementById("timer").innerHTML = "";
+    document.getElementById("question").innerHTML="";
+    document.getElementById("currentWord").innerHTML = "";
+
+
 }
 function submitAns(choice){
     socket.emit('submitAns',choice);
@@ -41,6 +64,9 @@ $('#createGame').click(function(){
 function joinGame(gameId){
     socket.emit('joinGame',gameId);
 }
+socket.on("updatePlayerList",function(data){
+    document.getElementById("questionMessage").innerHTML = "There are currently "+data+" player(s).";
+});
 socket.on('currentWord',function(data){
     document.getElementById("currentWord").innerHTML = data;
 });
@@ -84,7 +110,7 @@ socket.on('answerChoices',function(data){
 
 });
 socket.on("gameInfo",function(data){
-    document.getElementById("questionMessage").innerHTML= "The original word was "+data.origWord+". Team 1 got: "+data.team1Word+". Team 2 got: "+data.team2Word+".";
+    document.getElementById("questionMessage").innerHTML= "The original word was "+data.origWord+". Team 1 got: "+data.team1Word+" and a score of: "+data.team1Score+". Team 2 got: "+data.team2Word+" and a score of: "+data.team2Score+".";
 
 });
 socket.on("playerMessage",function(data){

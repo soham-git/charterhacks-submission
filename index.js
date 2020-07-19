@@ -44,9 +44,11 @@ io.on('connection', function (socket) {
         socket.emit('message', "hello");
     })
     socket.on('createGame', function (data) {
-        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{ players: [], question: -1, answer: -1, player: -1, currentWord: "", done:false }, { players: [], question: -1, answer: -1, player: -1, currentWord: "",done:false }], started: false, questionList: [], word: "" });
+        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{ players: [], question: -1, answer: -1, player: -1, currentWord: "", done:false,score:0 }, { players: [], question: -1, answer: -1, player: -1, currentWord: "",done:false,score:0 }], started: false, questionList: [], word: "" });
         socket.join(data.gameId);
         socket.emit('joinGame', { gameMode: "multi" });
+        io.to(data.gameId).emit("updatePlayerList",games[games.length-1].playerList.length);
+
         io.emit('gameList', games);
     })
     socket.on('joinGame', function (data) {
@@ -55,7 +57,7 @@ io.on('connection', function (socket) {
                 games[i].playerList.push(socket.id);
                 socket.join(data);
                 socket.emit('joinGame', { gameMode: "multi" });
-
+                io.to(data).emit("updatePlayerList",games[i].playerList.length);
                 break;
             }
         }
@@ -65,9 +67,11 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function () {
         for (var i = 0; i < games.length; i++) {
             if (games[i].playerList.includes(socket.id)) {
+
                 for (var j = 0; j < games[i].playerList.length; j++) {
                     if (games[i].playerList[j] == socket.id) {
                         games[i].playerList.splice(j, 1);
+
                         j--;
                     }
 
@@ -84,6 +88,8 @@ io.on('connection', function (socket) {
                         j--;
                     }
                 }
+                io.to(games[i].gameId).emit("updatePlayerList",games[i].playerList.length);
+
             }
         }
         io.emit('gameList', games);
@@ -110,6 +116,8 @@ io.on('connection', function (socket) {
                         j--;
                     }
                 }
+                io.to(games[i].gameId).emit("updatePlayerList",games[i].playerList.length);
+
             }
         }
         io.emit('gameList', games);
@@ -182,7 +190,7 @@ function startQuestion(game, team, questions) {
     if(questions==8){
         game.teams[team].done= true;
         if(game.teams[(team+1)%2].done){
-            io.to(game.gameId).emit("gameInfo",{origWord:game.word, team1Word:game.teams[0].currentWord,team2Word:game.teams[1].currentWord});
+            io.to(game.gameId).emit("gameInfo",{origWord:game.word, team1Word:game.teams[0].currentWord,team2Word:game.teams[1].currentWord, team1Score:game.teams[0].score,team2Score:game.teams[1].score});
         }
         return;
     }
@@ -238,6 +246,10 @@ function startQuestion(game, team, questions) {
         }
         else if (game.teams[team].answer != -1) {
             game.teams[team].currentWord += game.teams[team].answer;
+            if(game.teams[team].answer == game.word.charAt(questions) ){
+                game.teams[team].score += 30;
+            }
+            game.teams[team].score += Math.floor((15000 - (curTime - startTime)) / 1000);
             game.teams[team].answer = -1;
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
