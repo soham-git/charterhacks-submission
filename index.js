@@ -44,7 +44,7 @@ io.on('connection', function (socket) {
         socket.emit('message', "hello");
     })
     socket.on('createGame', function (data) {
-        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{ players: [], question: -1, answer: -1, player: -1, currentWord: "" }, { players: [], question: -1, answer: -1, player: -1, currentWord: "" }], started: false, questionList: [], word: "" });
+        games.push({ gameId: data.gameId, gameName: data.gameName, gameMode: data.gameMode, playerList: [socket.id], teams: [{ players: [], question: -1, answer: -1, player: -1, currentWord: "", done:false }, { players: [], question: -1, answer: -1, player: -1, currentWord: "",done:false }], started: false, questionList: [], word: "" });
         socket.join(data.gameId);
         socket.emit('joinGame', { gameMode: "multi" });
         io.emit('gameList', games);
@@ -158,7 +158,7 @@ function startGame(game) {
     game.questionList = [];
 
     while (game.questionList.length < 8) {
-        var r = Math.floor(Math.random() * 60);
+        var r = Math.floor(Math.random() * 62);
         if (game.questionList.indexOf(r) === -1) game.questionList.push(r);
     }
     console.log(game.questionList);
@@ -168,7 +168,13 @@ function startGame(game) {
     io.emit('gameList', games);
 }
 function startQuestion(game, team, questions) {
+    if(questions==8){
+        game.teams[team].done= true;
+        if(game.teams[(team+1)%2].done){
 
+        }
+        return;
+    }
 
     var answerChoices = [];
     var correctChar = game.word.charAt(questions);
@@ -176,13 +182,13 @@ function startQuestion(game, team, questions) {
 
     var alphabet = "abcdefghijklmnopqrstuvwxyz";
     alphabet = alphabet.replace(correctChar, '');
-    var curChar = alphabet.charAt(Math.floor(Math.random() * (26)));
-    alphabet = alphabet.replace(curChar, '');
-    answerChoices.push({ answer: listOfQuestions[game.questionList[questions]]["Choice 2"], char: curChar });
     var curChar = alphabet.charAt(Math.floor(Math.random() * (25)));
     alphabet = alphabet.replace(curChar, '');
-    answerChoices.push({ answer: listOfQuestions[game.questionList[questions]]["Choice 3"], char: curChar });
+    answerChoices.push({ answer: listOfQuestions[game.questionList[questions]]["Choice 2"], char: curChar });
     var curChar = alphabet.charAt(Math.floor(Math.random() * (24)));
+    alphabet = alphabet.replace(curChar, '');
+    answerChoices.push({ answer: listOfQuestions[game.questionList[questions]]["Choice 3"], char: curChar });
+    var curChar = alphabet.charAt(Math.floor(Math.random() * (23)));
     alphabet = alphabet.replace(curChar, '');
     answerChoices.push({ answer: listOfQuestions[game.questionList[questions]]["Choice 4"], char: curChar });
     for (var j = answerChoices.length - 1; j > 0; j--) {
@@ -214,7 +220,7 @@ function startQuestion(game, team, questions) {
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);
             }
-            if (questions + 1 < 8) {
+            if (questions + 1 <= 8) {
                 startQuestion(game, team, questions + 1);
             }
             clearInterval(gameClock);

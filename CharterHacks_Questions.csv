@@ -30,10 +30,10 @@ Number,Question,Correct Answer,Choice 2,Choice 3,Choice 4
 29,True or False: COVID-19 becomes more deadly when 5G interacts with the virus.,FALSE,TRUE,,
 30,Which of the following is the average amount of deaths in the US per one million citizens?,423,1023,302,57
 31,True or False: Saline nasal washes protect people from COVID-19.,FALSE,TRUE,,
-32,True or False: You can check COVID-19 hospital information on the CDC website.,FALSE,,,
-33,True or False: The White House is a trusted source of information on COVID-19.,FALSE,,,
+32,True or False: You can check COVID-19 hospital information on the CDC website.,TRUE,FALSE,,
+33,True or False: The White House is a trusted source of information on COVID-19.,FALSE,TRUE,,
 34,True or False: How long you can hold your breath cannot determine whether you have COVID-19 or not.,TRUE,FALSE,,
-35,True or False: COVID-19 originated in a secret lab in North Carolina.,FALSE,,,
+35,True or False: COVID-19 originated in a secret lab in North Carolina.,FALSE,TRUE,,
 36,True or False: Exposure to sunlight reduces the amount of time the virus can survive on objects.,TRUE,FALSE,,
 37,Does drinking water help flush out the virus?,"No, there is no evidence that this is true, but hydration is still important.","Yes, this is accurate.","No, because hydration is a hoax.",Imagine drinking water. LOL
 38,"As of July 18, how many countries have not reported a case of COVID-19?",12,0,1,4
