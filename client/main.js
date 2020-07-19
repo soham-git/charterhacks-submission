@@ -45,8 +45,25 @@ socket.on('currentWord',function(data){
     document.getElementById("currentWord").innerHTML = data;
 });
 socket.on('question',function(data){
-    document.getElementById("question").innerHTML=data.Question;
+    document.getElementById("question").innerHTML=data;
     
+});
+socket.on('answerChoices',function(data){
+    document.getElementById("btnChoice1").onclick = function(){submitAns(data[0].char);}
+    document.getElementById("btnChoice2").onclick = function(){submitAns(data[1].char);}
+    document.getElementById("btnChoice3").onclick = function(){submitAns(data[2].char);}
+    document.getElementById("btnChoice4").onclick = function(){submitAns(data[3].char);}
+
+    document.getElementById("letter1").innerHTML = data[0].char;
+    document.getElementById("letter2").innerHTML = data[1].char;
+    document.getElementById("letter3").innerHTML = data[2].char;
+    document.getElementById("letter4").innerHTML = data[3].char;
+
+    document.getElementById("answer1").innerHTML = data[0].answer;
+    document.getElementById("answer2").innerHTML = data[1].answer;
+    document.getElementById("answer3").innerHTML = data[2].answer;
+    document.getElementById("answer4").innerHTML = data[3].answer;
+
 });
 socket.on("playerMessage",function(data){
     document.getElementById("questionMessage").innerHTML=data;
