@@ -49,11 +49,29 @@ socket.on('question',function(data){
     
 });
 socket.on('answerChoices',function(data){
+
+    $("#btnChoice1").show();
+    $("#btnChoice2").show();
+    $("#btnChoice3").show();
+    $("#btnChoice4").show();
+
     document.getElementById("btnChoice1").onclick = function(){submitAns(data[0].char);}
     document.getElementById("btnChoice2").onclick = function(){submitAns(data[1].char);}
     document.getElementById("btnChoice3").onclick = function(){submitAns(data[2].char);}
     document.getElementById("btnChoice4").onclick = function(){submitAns(data[3].char);}
 
+    if(data[0].answer.length==0){
+        $("#btnChoice1").hide();
+    }
+    if(data[1].answer.length==0){
+        $("#btnChoice2").hide();
+    }
+    if(data[2].answer.length==0){
+        $("#btnChoice3").hide();
+    }
+    if(data[3].answer.length==0){
+        $("#btnChoice4").hide();
+    }
     document.getElementById("letter1").innerHTML = data[0].char;
     document.getElementById("letter2").innerHTML = data[1].char;
     document.getElementById("letter3").innerHTML = data[2].char;
