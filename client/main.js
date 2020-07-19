@@ -84,7 +84,7 @@ socket.on('answerChoices',function(data){
 
 });
 socket.on("gameInfo",function(data){
-    document.getElementById("questionMessage").innerHTML= "The original word was "+data.origWord+". Team 1 got: "+data.team1Word+" Team 2 got: "+data.team2Word;
+    document.getElementById("questionMessage").innerHTML= "The original word was "+data.origWord+". Team 1 got: "+data.team1Word+". Team 2 got: "+data.team2Word+".";
 
 });
 socket.on("playerMessage",function(data){

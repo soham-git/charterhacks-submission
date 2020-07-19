@@ -165,11 +165,18 @@ function startGame(game) {
         var r = Math.floor(Math.random() * 62);
         if (game.questionList.indexOf(r) === -1) game.questionList.push(r);
     }
-    console.log(game.questionList);
     game.word = wordList[Math.floor(Math.random() * (500)) + 1].word;
+    
+    io.emit('gameList', games);
+
+    if(game.teams[0].players.length==0){
+        game.teams[0].done= true;
+    }
+    if(game.teams[1].players.length==0){
+        game.teams[1].done= true;
+    }
     startQuestion(game, 0, 0);
     startQuestion(game, 1, 0);
-    io.emit('gameList', games);
 }
 function startQuestion(game, team, questions) {
     if(questions==8){
