@@ -1,84 +1,83 @@
 body {
-    background: #f7e8e826;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  p {
-    font-family: 'Arial', sans-serif;
-  }
-  
-  #collapsible {
-      margin-left:20%;
-      margin-right:20%;
-  }
-  
-  #games {
-    width: 80%;
-    height: 400px;
-    overflow: scroll;
-    border: solid 1px #e5e5eb;
-    border-radius: 10px;
-    margin:auto;
-  }
-  
-  #game-create-selector {
-    text-align: center;
-    padding: 5px;
-    border-style: solid;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding-bottom: 20px;
-  }
-  
-  #multiPlayer {
-    margin-left: 50px;
-    margin-right: 50px;
-  }
-  
-  table.center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  p.large {
-    font-size: 20px;
-  }
-  
-  button.center {
-    height:30px;
-    width:150px;
-    margin: -20px -50px;
-    position:relative;
-    top:50%;
-    left:50%;
-  }
-  
-  .collapsible {
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    padding: 16px;
-    width: 100%;
-    border: none;
-    text-align: center;
-    outline: none;
-    font-size: 20px;
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
-  }
-  
-  .active, .collapsible:hover {
-    background-color: #c1c1c1;
-  }
-  
-  .content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-  }
-  
+  background: #f7e8e826;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+}
+
+#collapsible {
+  margin-left:20%;
+  margin-right:20%;
+}
+
+#games {
+  width: 80%;
+  height: 400px;
+  overflow: scroll;
+  border: solid 1px #e5e5eb;
+  border-radius: 10px;
+  margin:auto;
+}
+
+#game-create-selector {
+  text-align: center;
+  padding: 5px;
+  border-style: solid;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: 20px;
+}
+
+#multiPlayer {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p.large {
+  font-size: 20px;
+}
+
+button.center {
+  height:30px;
+  width:150px;
+  margin: -20px -50px;
+  position:relative;
+  top:50%;
+  left:50%;
+}
+
+.collapsible {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 20px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.active, .collapsible:hover {
+  background-color: #c1c1c1;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #E0FBFF;
+}
