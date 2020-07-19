@@ -13,6 +13,14 @@
 <body>
 
     <h1>Co-opvid</h1>
+    <br><br>
+    <div id="collapsible">
+      <button type="button" class="collapsible">How To Play</button>
+      <div class="content">
+        <p>Co-opvid is a fun little trivia game all about COVID-19! Below you'll see a Game Creation menu, and below that lies the lobby, where you can join other multiplayer games. You can also make a singleplayer game.</p><p>The goal of each game is to fill in the missing letters of a word by answering COVID-related questions. If you get the question correct, one letter will go into the right spot. However, if you get it wrong, an incorrect letter will go into that spot. Each game has exactly 8 questions for you to enjoy. Have fun!</p>
+      </div>
+    </div>
+    <br><br>
 
     <div id="lobby">
         <div id="game-create-selector">
@@ -105,5 +113,21 @@
     </div>
 </body>
 <script src="main.js"></script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 
 </html>
