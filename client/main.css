@@ -1,14 +1,17 @@
 body {
   background: #f7e8e826;
 }
+
 h1 {
   font-family: 'Montserrat Subrayada', sans-serif;
   font-size: 50px;
   text-align: center;
 }
+
 p {
   font-family: 'Arial', sans-serif;
 }
+
 #games {
   width: 80%;
   height: 400px;
@@ -17,6 +20,7 @@ p {
   border-radius: 10px;
   margin:auto;
 }
+
 #game-create-selector {
   text-align: center;
   padding: 5px;
@@ -25,13 +29,16 @@ p {
   margin-right: 200px;
   padding-bottom: 20px;
 }
+
 table.center {
   margin-left: auto;
   margin-right: auto;
 }
+
 p.large {
   font-size: 20px;
 }
+
 button.center {
   height:30px;
   width:150px;
