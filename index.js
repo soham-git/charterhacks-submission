@@ -43,6 +43,9 @@ io.on('connection', function (socket) {
         if (data.gameName.trim() == "") { //checks if the player put a valid name for their game
             data.gameName = "Default Game";
         }
+        if (data.timeLimit <1 || data.timeLimit>60) { //checks if the player put a valid time
+            data.timeLimit = 15;
+        }
         games.push({ //initiates game information and pushes into the game list.
             gameId: data.gameId,
             gameName: data.gameName,
@@ -52,7 +55,8 @@ io.on('connection', function (socket) {
             { players: [], question: -1, answer: -1, player: -1, currentWord: "", done: false, score: 0 }],
             started: false,
             questionList: [],
-            word: ""
+            word: "",
+            timeLimit: data.timeLimit
         });
 
         socket.join(data.gameId); //adds player to the socket room for the game.
@@ -258,9 +262,9 @@ function startQuestion(game, team, questions) {
         var curDate = new Date();
         curTime = curDate.getTime();
         for (var i = 0; i < game.teams[team].players.length; i++) {
-            io.to(game.teams[team].players[i]).emit('timer', Math.max(0, (15000 - (curTime - startTime)) / 1000)); //emits the time remaining to all players on the team.
+            io.to(game.teams[team].players[i]).emit('timer', Math.max(0, (game.timeLimit*1000 - (curTime - startTime)) / 1000)); //emits the time remaining to all players on the team.
         }
-        if (curTime - startTime > 15000) { //Runs when time runs out.
+        if (curTime - startTime > game.timeLimit*1000) { //Runs when time runs out.
             game.teams[team].currentWord += "_"; //appends a blank space because the answerer did not choose in time.
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord); //updates the word shown on screen
@@ -275,7 +279,7 @@ function startQuestion(game, team, questions) {
             if (game.teams[team].answer == game.word.charAt(questions)) { //If the answer is correct, the team gains points.
                 game.teams[team].score += 30;
             }
-            game.teams[team].score += Math.floor((15000 - (curTime - startTime)) / 1000); //The team gains points based on how much time the answerer had left.
+            game.teams[team].score += Math.floor((game.timeLimit*1000 - (curTime - startTime)) / 1000); //The team gains points based on how much time the answerer had left.
             game.teams[team].answer = -1; //resets the team's answer.
             for (var i = 0; i < game.teams[team].players.length; i++) {
                 io.to(game.teams[team].players[i]).emit("currentWord", "Currently, your word starts with: " + game.teams[team].currentWord);

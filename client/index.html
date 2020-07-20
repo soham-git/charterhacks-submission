@@ -13,52 +13,73 @@
 
 <body>
 
-    <a onclick="showLobby();" href="#"><h1 style="font-family: 'Montserrat Subrayada', sans-serif; font-size:60px;">Co-opvid</h1></a>
+    <a onclick="showLobby();" href="#">
+        <h1 style="font-family: 'Montserrat Subrayada', sans-serif; font-size:60px;">Co-opvid</h1>
+    </a>
     <br><br>
 
     <div id="lobby">
 
         <div id="collapsible">
-          <button type="button" class="collapsible">How To Play</button>
-          <div class="content">
-            <p style="font-family: 'Open Sans', sans-serif;">Co-opvid is a fun little multiplayer trivia game all about COVID-19! Below you'll see a Game Creation menu, and underneath that lies the lobby, where you can join other games. When people join the lobby and you press Start, you will automatically be placed into teams.</p><p style="font-family: 'Open Sans', sans-serif;">The goal of each game is to fill in the missing letters of a word by answering COVID-related questions. If you get the question correct, one letter will go into the right spot. However, if you get it wrong, an incorrect letter will go into that spot. You can use the previous letters to help you guess if you can't narrow the answer down to one choice. Each game has exactly 8 questions for you to enjoy. Have fun!</p>
-          </div>
+            <button type="button" class="collapsible">How To Play</button>
+            <div class="content">
+                <p style="font-family: 'Open Sans', sans-serif;">Co-opvid is a fun little multiplayer trivia game all
+                    about COVID-19! Below you'll see a Game Creation menu, and underneath that lies the lobby, where you
+                    can join other games. When people join the lobby and you press Start, you will automatically be
+                    placed into teams.</p>
+                <p style="font-family: 'Open Sans', sans-serif;">The goal of each game is to fill in the missing letters
+                    of a word by answering COVID-related questions. If you get the question correct, one letter will go
+                    into the right spot. However, if you get it wrong, an incorrect letter will go into that spot. You
+                    can use the previous letters to help you guess if you can't narrow the answer down to one choice.
+                    Each game has exactly 8 questions for you to enjoy. Have fun!</p>
+            </div>
         </div>
         <br><br>
 
         <div id="game-create-selector">
 
-        <p class="large" style="font-family: 'Open Sans', sans-serif;"> Create a game:</p>
+            <p class="large" style="font-family: 'Open Sans', sans-serif;"> Create a game:</p>
 
-        <table class="center">
-            <tr>
-                <td>
-                    <p class="large" style="font-family: 'Open Sans', sans-serif;"><b>Game Name: &nbsp</b></p>
-                </td>
-                <td>
-                    <input class="w3-input" type="text" id="gameName" placeholder="Name" />
-                </td>
-            </tr>
+            <table class="center">
+                <tr>
+                    <td>
+                        <p class="large" style="font-family: 'Open Sans', sans-serif;"><b>Game Name: &nbsp</b></p>
+                    </td>
+                    <td>
+                        <input class="w3-input" type="text" id="gameName" placeholder="Name" />
+                    </td>
+                </tr>
 
-            <tr>
-                <!--<td>
+                <tr>
+                    <!--<td>
                     <p class="large" style="font-family: 'Open Sans', sans-serif;"><b>Game Mode:</b></p>
                 </td>
                 <td><select id="gamemode" style="width:130px;">
                         <option value="multiplayer">Multiplayer</option>
                     </select>
                 </td>-->
-            </tr>
+                </tr>
 
-            <tr>
-                <td>
-                    <button id="createGame" class="center" style="font-family: 'Open Sans', sans-serif;"> Create Game</button>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <p class="large" style="font-family: 'Open Sans', sans-serif;"><b>Time Limit
+                               : </b></p>
+                    </td>
+                    <td style="text-align: left;">
+                        <input type="number" id="timeLimit" name="timeLimit" min="1" max="60" value="15" /> 
+                    </td>
+                </tr>
 
-        </table>
-      </div>
-      <br><br>
+                <tr>
+                    <td>
+                        <button id="createGame" class="center" style="font-family: 'Open Sans', sans-serif;"> Create
+                            Game</button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <br><br>
 
         <section style="border-style: solid; padding:10px;" id="games">
         </section>
@@ -83,7 +104,9 @@
         <h1 id="timer" style="font-family: 'Open Sans', sans-serif;"></h1>
         <h2 id="questionMessage" style="font-family: 'Open Sans', sans-serif;"></h2>
         <section id="currentWordBox" style="border-style: solid; padding:10px;">
-            <b><h3 id="currentWord" style="font-family: 'Open Sans', sans-serif;"></h3></b>
+            <b>
+                <h3 id="currentWord" style="font-family: 'Open Sans', sans-serif;"></h3>
+            </b>
         </section>
         <br />
         <section id="questionBox" style="border-style: solid; padding:10px;">
@@ -115,20 +138,20 @@
 </body>
 <script src="main.js"></script>
 <script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
     }
-  });
-}
 </script>
 
 </html>

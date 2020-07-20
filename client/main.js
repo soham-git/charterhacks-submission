@@ -56,7 +56,13 @@ $('#createGame').click(function () {
     var d = new Date();
     var gameId = d.getTime();
     var gameName = $("#gameName").val();
-    socket.emit('createGame', { gameId: gameId, gameName: gameName, gameMode: "multi" });
+    var timeLimit = $("#timeLimit").val();
+    socket.emit('createGame', {
+        gameId: gameId,
+        gameName: gameName,
+        gameMode: "multi",
+        timeLimit: timeLimit
+    });
     //showMultiPlayer();
     //  }
 });
