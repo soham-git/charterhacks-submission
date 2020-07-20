@@ -18,6 +18,7 @@ function showMultiPlayer() {
     $("#singlePlayer").hide();
     $("#multiPlayer").show();
 
+    //Resets all text and buttons.
     document.getElementById("btnChoice1").onclick = function () { };
     document.getElementById("btnChoice2").onclick = function () { };
     document.getElementById("btnChoice3").onclick = function () { };
@@ -42,7 +43,7 @@ function showMultiPlayer() {
 
 }
 function submitAns(choice) {
-    socket.emit('submitAns', choice);
+    socket.emit('submitAns', choice); 
 }
 $('#multiStart').click(function () {
     socket.emit('start', true);
@@ -81,17 +82,19 @@ socket.on('question', function (data) {
 
 });
 socket.on('answerChoices', function (data) {
-
+    //shows all hidden buttons
     $("#btnChoice1").show();
     $("#btnChoice2").show();
     $("#btnChoice3").show();
     $("#btnChoice4").show();
 
+    // sets the onclick attribute to submit the given answer
     document.getElementById("btnChoice1").onclick = function () { submitAns(data[0].char); }
     document.getElementById("btnChoice2").onclick = function () { submitAns(data[1].char); }
     document.getElementById("btnChoice3").onclick = function () { submitAns(data[2].char); }
     document.getElementById("btnChoice4").onclick = function () { submitAns(data[3].char); }
 
+    //sets some buttons to hidden if it is a True/False question.
     if (data[0].answer.length == 0) {
         $("#btnChoice1").hide();
     }
@@ -104,11 +107,14 @@ socket.on('answerChoices', function (data) {
     if (data[3].answer.length == 0) {
         $("#btnChoice4").hide();
     }
+
+    //Shows the characters
     document.getElementById("letter1").innerHTML = data[0].char;
     document.getElementById("letter2").innerHTML = data[1].char;
     document.getElementById("letter3").innerHTML = data[2].char;
     document.getElementById("letter4").innerHTML = data[3].char;
 
+    //shows the answer choices
     document.getElementById("answer1").innerHTML = data[0].answer;
     document.getElementById("answer2").innerHTML = data[1].answer;
     document.getElementById("answer3").innerHTML = data[2].answer;
@@ -122,13 +128,13 @@ socket.on("gameInfo", function (data) {
 socket.on("playerMessage", function (data) {
     document.getElementById("questionMessage").innerHTML = data;
 });
-socket.on("timer", function (data) {
+socket.on("timer", function (data) { //updates the countdown timer
     document.getElementById("timer").innerHTML = data;
 });
 socket.on("message", function (data) {
     alert(data);
 });
-socket.on("gameList", function (data) {
+socket.on("gameList", function (data) { //takes in the game list and displays them as buttons in the lobby
     $("#games").empty();
 
     for (var i = 0; i < data.length; i++) {
