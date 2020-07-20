@@ -36,8 +36,9 @@ CSVToJSON().fromFile('CharterHacks_Words.csv')
     });
 var games = [];
 io.on('connection', function (socket) {
-    io.emit('gameList', games); //sends the player the list of games to display in the lobby
-
+    //Anytime this line shows up, it means something affected the visibility of a game which needs to be represented on the client side.
+    io.emit('gameList', games); 
+    
     //runs when a player creates a game
     socket.on('createGame', function (data) {
         if (data.gameName.trim() == "") { //checks if the player put a valid name for their game
