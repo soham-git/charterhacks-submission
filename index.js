@@ -192,7 +192,7 @@ function startGame(game) {
     game.questionList = [];
 
     while (game.questionList.length < 8) {//Creates a list of random numbers to pull questions. Currently all words are length 8.
-        var r = Math.floor(Math.random() * 62);
+        var r = Math.floor(Math.random() * 74);
         if (game.questionList.indexOf(r) === -1) game.questionList.push(r);
     }
 
