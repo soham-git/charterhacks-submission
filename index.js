@@ -13,7 +13,7 @@ var io = require('socket.io')(server);
 
 var listOfQuestions;
 var wordList;
-CSVToJSON().fromFile('CharterHacks_Questions.csv')
+CSVToJSON().fromFile('CharterHacks_Questions.csv') //loads in questions
     .then(data => {
 
         // users is a JSON array
@@ -24,7 +24,7 @@ CSVToJSON().fromFile('CharterHacks_Questions.csv')
         console.log(err);
     });
 
-CSVToJSON().fromFile('CharterHacks_Words.csv')
+CSVToJSON().fromFile('CharterHacks_Words.csv') //loads in words
     .then(data => {
 
         // users is a JSON array
@@ -38,7 +38,7 @@ var games = [];
 io.on('connection', function (socket) {
     //Anytime this line shows up, it means something affected the visibility of a game which needs to be represented on the client side.
     io.emit('gameList', games); 
-    
+
     //runs when a player creates a game
     socket.on('createGame', function (data) {
         if (data.gameName.trim() == "") { //checks if the player put a valid name for their game

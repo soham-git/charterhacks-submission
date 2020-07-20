@@ -32,7 +32,7 @@ Number,Question,Correct Answer,Choice 2,Choice 3,Choice 4
 31,True or False: Saline nasal washes protect people from COVID-19.,FALSE,TRUE,,
 32,True or False: You can check COVID-19 hospital information on the CDC website.,TRUE,FALSE,,
 33,True or False: The White House is a trusted source of information on COVID-19.,FALSE,TRUE,,
-34,True or False: How long you can hold your breath cannot determine whether you have COVID-19 or not.,TRUE,FALSE,,
+34,True or False: Holding your breath does not determine if you have COVID-19.,TRUE,FALSE,,
 35,True or False: COVID-19 originated in a secret lab in North Carolina.,FALSE,TRUE,,
 36,True or False: Exposure to sunlight reduces the amount of time the virus can survive on objects.,TRUE,FALSE,,
 37,Does drinking water help flush out the virus?,"No, there is no evidence that this is true, but hydration is still important.","Yes, this is accurate.","No, because hydration is a hoax.",Imagine drinking water. LOL
@@ -61,3 +61,40 @@ Number,Question,Correct Answer,Choice 2,Choice 3,Choice 4
 60,True or False: COVID-19 is more deadly towards people of certain ethnicities. ,FALSE,TRUE,,
 61,True or False: COVID-19 cannot spread through the water in swimming pools.,TRUE,FALSE,,
 62,Which of the following is a result of taking a vaccine?,You are less likely to get the disease,You become controlled by the government,You get other diseases,Nothing happens; vaccines are placebos
+63,True or False: Gargling vinegar will kill the virus.,FALSE,TRUE,,
+64,How infectious is the coronavirus compared to the flu and measles?,"More infectious than the flu, less infectious than measles.","More infectious than measles, less infectious than the flu.",They are all equally infectious.,The coronavirus isn't infectious at all.
+65,True or False: Does SARS-CoV-2 keep mutating?,TRUE,FALSE,,
+66,Why is COVID-19 testing important?,It identifies people who have the disease so they can be treated and isolated,It is a ploy to make the US look bad because they have a lot of cases.,To scare people.,So politicians can keep their jobs
+67,True or False: It is okay to not stay at home because everyone I know is healthy.,FALSE,TRUE,,
+68,Why are lockdowns important during COVID-19?,"This forces people to social distance, which prevents transmission of the virus if someone is infected.",It allows the government to oppress the people.,It is good for the environment.,So people can work from home.
+69,How sick should one be until they absolutely must stay home?,Any sign of sickness.,If they have a fever,If they have a cough.,Sickness shouldn't affect people's ability to go out.
+70,True or False: It is possible to get a card online that allows me to not wear a mask by simply entering some basic personal information.,FALSE,TRUE,,
+71,When do people typically develop symptoms after being exposed to the virus.,Varies; anytime between 2 to 14 days,Immediately,9-11 days,12-14 days
+72,How many lives could be saved by November 1 in the US if 95% of people started wearing face masks?,"45,000","2,000","20,000","32,000"
+73,"At the current projected infection and death rate of COVID-19 in the US, how many deaths are predicted by November 1, 2020.","210,000","195,000","180,000","250,000"
+74,"Between World War I, the Vietnam War, World War II, and COVID-19, rank the events in order from the least amount of deaths to the most amount of deaths.","Vietnam War, World War I, COVID-19, World War II","COVID-19, Vietnam War, World War I, World War II","Vietnam War, COVID-19, World War I, World War II","World War I, Vietnam War, COVID-19, World War II"
+75,,,,,
+76,,,,,
+77,,,,,
+78,,,,,
+79,,,,,
+80,,,,,
+81,,,,,
+82,,,,,
+83,,,,,
+84,,,,,
+85,,,,,
+86,,,,,
+87,,,,,
+88,,,,,
+89,,,,,
+90,,,,,
+91,,,,,
+92,,,,,
+93,,,,,
+94,,,,,
+95,,,,,
+96,,,,,
+97,,,,,
+98,,,,,
+99,,,,,
