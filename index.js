@@ -36,6 +36,7 @@ CSVToJSON().fromFile('CharterHacks_Words.csv') //loads in words
     });
 var games = [];
 io.on('connection', function (socket) {
+    console.log(listOfQuestions);
     //Anytime this line shows up, it means something affected the visibility of a game which needs to be represented on the client side.
     io.emit('gameList', games); 
 
@@ -192,7 +193,7 @@ function startGame(game) {
     game.questionList = [];
 
     while (game.questionList.length < 8) {//Creates a list of random numbers to pull questions. Currently all words are length 8.
-        var r = Math.floor(Math.random() * 74);
+        var r = Math.floor(Math.random() * 73);
         if (game.questionList.indexOf(r) === -1) game.questionList.push(r);
     }
 
